@@ -1,12 +1,12 @@
 import React from "react";
 import { SafeAreaView, Text, View } from "react-native";
-import { CustomButton } from "../../components/CustomButton";
-import Logo from "../../assets/images/logo.svg";
+import { CustomButton } from "components/CustomButton";
+import Logo from "assets/images/logo.svg";
 import { Container } from "../container/container";
 
 export const HomeScreen = ({ navigation: { navigate } }) => {
   return (
-    <Container>
+    <Container background>
       <View style={{ alignItems: "center" }}>
         <Logo />
         <CustomButton

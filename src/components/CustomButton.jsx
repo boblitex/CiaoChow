@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../theme/colors";
+
 export const CustomButton = ({ onPress, buttonText, inverted }) => {
   return (
     <TouchableOpacity onPress={onPress}>

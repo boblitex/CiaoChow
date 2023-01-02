@@ -1,4 +1,4 @@
-import { MainNavigation } from "./navigation/MainNavigation";
+import { MainNavigation } from "./src/navigation/MainNavigation";
 import { useFonts } from "expo-font";
 
 export default function App() {
