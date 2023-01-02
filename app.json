@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "CiaoChow",
-    "slug": "CiaoChow",
+    "slug": "ciaochow",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,6 +28,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "96cba5aa-038b-450a-ac62-20c4b8568760"
+      }
+    },
+    "owner": "boblite"
   }
 }
