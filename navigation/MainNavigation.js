@@ -14,7 +14,7 @@ export const MainNavigation = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          // options={{ headerShown: false }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen name="login" component={Login} />
         <Stack.Screen name="register" component={Register} />
