@@ -8,6 +8,7 @@ export default function App() {
     Bold: require("./assets/fonts/Inter-Bold.ttf"),
     Light: require("./assets/fonts/Inter-Light.ttf"),
     ExtraBold: require("./assets/fonts/Inter-ExtraBold.ttf"),
+    HeaderBold: require("./assets/fonts/MontserratAlternates-SemiBold.ttf"),
   });
 
   if (!fontsLoaded) {
