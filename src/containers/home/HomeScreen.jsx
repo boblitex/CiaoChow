@@ -38,7 +38,7 @@ export const HomeScreen = ({ navigation: { navigate } }) => {
           .map((dot, index) => {
             const dotColor =
               index === 2 ? colors.Primary.primaryWhite : colors.Primary.gray4;
-            return <SlideDots color={dotColor} />;
+            return <SlideDots color={dotColor} key={`${dot}${index}`} />;
           })}
       </View>
     </Container>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 70,
+    marginTop: 70,
   },
   text: {
     color: "white",

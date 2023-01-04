@@ -4,17 +4,17 @@ import { colors } from "../theme/colors";
 
 export const CustomButton = ({ onPress, buttonText, inverted }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View
-        style={[
-          styles.buttonStyle,
-          {
-            backgroundColor: inverted
-              ? colors.Primary.primaryWhite
-              : colors.Primary.primaryGreen,
-          },
-        ]}
-      >
+    <View
+      style={[
+        styles.buttonStyle,
+        {
+          backgroundColor: inverted
+            ? colors.Primary.primaryWhite
+            : colors.Primary.primaryGreen,
+        },
+      ]}
+    >
+      <TouchableOpacity onPress={onPress}>
         <Text
           style={{
             color: inverted
@@ -26,8 +26,8 @@ export const CustomButton = ({ onPress, buttonText, inverted }) => {
         >
           {buttonText}
         </Text>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     height: 54,
     width: 335,
     borderRadius: 10,
-    padding: 18,
+    padding: 15,
     alignItems: "center",
     justifyContent: "center",
   },
