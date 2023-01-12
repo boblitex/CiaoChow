@@ -77,8 +77,9 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   buttonStyle: {
-    alignItems: "center",
     marginVertical: 50,
+    width: "100%",
+    paddingHorizontal: 20,
   },
   slideDots: {
     alignItems: "center",
