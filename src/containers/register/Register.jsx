@@ -14,8 +14,22 @@ import BackArrow from "assets/images/Vector.svg";
 import Icon from "assets/images/icon1.svg";
 import { colors } from "src/theme/colors";
 import { CustomButton } from "components/CustomButton";
+import { Controller, useForm } from "react-hook-form";
 
 export const Register = ({ navigation: { navigate, goBack } }) => {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+    const { email, password, username } = data;
+  };
+
   return (
     <Container background>
       <TouchableOpacity
@@ -40,48 +54,59 @@ export const Register = ({ navigation: { navigate, goBack } }) => {
       >
         <ScrollView style={styles.textInputContainer}>
           <Text style={{ margin: 6, marginLeft: 10 }}>Username</Text>
-          <TextInput
-            keyboardType="default"
-            placeholder="muncher"
-            style={{
-              backgroundColor: colors.Primary.gray6,
-              height: 46,
-              borderRadius: 10,
-              marginHorizontal: 10,
-              marginVertical: 10,
-              padding: 13,
-            }}
+          <Controller
+            control={control}
+            name="username"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                keyboardType="default"
+                placeholder="muncher"
+                style={styles.textStyle}
+                value={value}
+                onBlur={onBlur}
+                onChangeText={onChange}
+              />
+            )}
           />
+
           <Text style={{ margin: 6, marginLeft: 10 }}>Email</Text>
-          <TextInput
-            keyboardType="email-address"
-            placeholder="yourmail@mail.com"
-            style={{
-              backgroundColor: colors.Primary.gray6,
-              height: 46,
-              borderRadius: 10,
-              marginHorizontal: 10,
-              marginVertical: 10,
-              padding: 13,
-            }}
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                keyboardType="email-address"
+                placeholder="yourmail@mail.com"
+                style={styles.textStyle}
+                value={value}
+                onBlur={onBlur}
+                onChangeText={onChange}
+              />
+            )}
           />
           <Text style={{ marginVertical: 6, marginLeft: 10 }}>password</Text>
-          <TextInput
-            secureTextEntry={true}
-            keyboardType="default"
-            placeholder="password"
-            style={{
-              backgroundColor: colors.Primary.gray6,
-              height: 46,
-              borderRadius: 10,
-              marginHorizontal: 10,
-              paddingHorizontal: 13,
-            }}
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                secureTextEntry={true}
+                keyboardType="default"
+                placeholder="password"
+                style={styles.textStyle}
+                value={value}
+                onBlur={onBlur}
+                onChangeText={onChange}
+              />
+            )}
           />
         </ScrollView>
       </KeyboardAvoidingView>
       <View style={styles.buttonContainer}>
-        <CustomButton buttonText={"Register"} />
+        <CustomButton
+          buttonText={"Register"}
+          onPress={handleSubmit(onSubmit)}
+        />
         <Text
           style={{
             alignSelf: "center",
@@ -111,5 +136,13 @@ const styles = StyleSheet.create({
     fontSize: 34,
   },
   textInputContainer: { paddingHorizontal: 10 },
+  textStyle: {
+    backgroundColor: colors.Primary.gray6,
+    height: 46,
+    borderRadius: 10,
+    marginHorizontal: 10,
+    marginVertical: 10,
+    padding: 13,
+  },
   buttonContainer: { paddingHorizontal: 20 },
 });
