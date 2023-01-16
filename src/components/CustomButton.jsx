@@ -1,8 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { colors } from "../theme/colors";
 
-export const CustomButton = ({ onPress, buttonText, inverted }) => {
+export const CustomButton = ({ onPress, buttonText, inverted, loading }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View
@@ -15,17 +21,21 @@ export const CustomButton = ({ onPress, buttonText, inverted }) => {
           },
         ]}
       >
-        <Text
-          style={{
-            color: inverted
-              ? colors.Primary.primaryGreen
-              : colors.Primary.primaryWhite,
-            fontFamily: "SemiBold",
-            fontSize: 18,
-          }}
-        >
-          {buttonText}
-        </Text>
+        {loading ? (
+          <ActivityIndicator color={"white"} size="large" />
+        ) : (
+          <Text
+            style={{
+              color: inverted
+                ? colors.Primary.primaryGreen
+                : colors.Primary.primaryWhite,
+              fontFamily: "SemiBold",
+              fontSize: 18,
+            }}
+          >
+            {buttonText}
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );

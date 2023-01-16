@@ -47,7 +47,7 @@ export const Login = ({ navigation: { navigate, goBack } }) => {
         <Icon height={317} width={129} marginRight={30} />
       </View>
       <KeyboardAvoidingView
-        keyboardVerticalOffset={10}
+        keyboardVerticalOffset={40}
         style={{ flex: 1 }}
         behavior={Platform.select({ ios: "padding", android: "height" })}
       >
@@ -83,10 +83,17 @@ export const Login = ({ navigation: { navigate, goBack } }) => {
               />
             )}
           />
+          <TouchableOpacity>
+            <Text style={styles.forgotPassword}>Forgot password</Text>
+          </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
       <View style={styles.buttonContainer}>
-        <CustomButton buttonText={"Login"} onPress={handleSubmit(onSubmit)} />
+        <CustomButton
+          buttonText={"Login"}
+          onPress={handleSubmit(onSubmit)}
+          // loading
+        />
         <Text
           style={{
             alignSelf: "center",
@@ -96,7 +103,7 @@ export const Login = ({ navigation: { navigate, goBack } }) => {
           onPress={() => navigate("register")}
         >
           Don't have an account?
-          <Text style={{ fontWeight: "700" }}>Register</Text>
+          <Text style={{ fontWeight: "700" }}> Register</Text>
         </Text>
       </View>
     </Container>
@@ -125,5 +132,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 13,
   },
-  buttonContainer: { paddingHorizontal: 20, marginBottom: "20%" },
+  buttonContainer: { paddingHorizontal: 20, marginBottom: "20%", flex: 0.15 },
+  forgotPassword: {
+    color: colors.Primary.primaryGreen,
+    alignSelf: "flex-end",
+    fontSize: 10,
+    paddingRight: 20,
+  },
 });
