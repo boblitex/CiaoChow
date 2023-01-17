@@ -24,7 +24,6 @@ export const Register = ({ navigation: { navigate, goBack } }) => {
       password: "",
     },
   });
-  console.log("BASE", process.env.BASE_URL);
 
   const onSubmit = (data) => {
     console.log(data);

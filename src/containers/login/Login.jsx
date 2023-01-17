@@ -15,6 +15,10 @@ import Icon from "assets/images/icon2.svg";
 import { colors } from "src/theme/colors";
 import { CustomButton } from "components/CustomButton";
 import { Controller, useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import axios from "axios";
+import { instance } from "utils/axiosConfig";
+import { loginHelper } from "utils/loginHelper";
 
 export const Login = ({ navigation: { navigate, goBack } }) => {
   const { control, handleSubmit } = useForm({
@@ -24,9 +28,14 @@ export const Login = ({ navigation: { navigate, goBack } }) => {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
     const { email, password } = data;
+    try {
+      const res = await loginHelper(email, password);
+      console.log(res.data);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   return (

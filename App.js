@@ -1,5 +1,6 @@
 import { MainNavigation } from "./src/navigation/MainNavigation";
 import { useFonts } from "expo-font";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -14,9 +15,12 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
+
+  const queryClient = new QueryClient();
+
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <MainNavigation />
-    </>
+    </QueryClientProvider>
   );
 }
