@@ -1,6 +1,7 @@
 import { Container } from "containers/container/container";
 import React from "react";
 import {
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -15,6 +16,10 @@ import Icon from "assets/images/icon1.svg";
 import { colors } from "src/theme/colors";
 import { CustomButton } from "components/CustomButton";
 import { Controller, useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { registerHelper } from "utils/authHelper";
+import { instance } from "utils/axiosConfig";
+import axios from "axios";
 
 export const Register = ({ navigation: { navigate, goBack } }) => {
   const { control, handleSubmit } = useForm({
@@ -25,9 +30,44 @@ export const Register = ({ navigation: { navigate, goBack } }) => {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const { mutate: registerMutation, isLoading } = useMutation({
+    mutationFn: ({ username, email, password }) =>
+      registerHelper(username, email, password),
+  });
+
+  const onSubmit = async (data) => {
     const { email, password, username } = data;
+    try {
+      registerMutation(
+        { username, email, password },
+        {
+          onSuccess: (data) => {
+            const name = data.data.user.username;
+            Alert.alert(`Hi ${name}, your registration was succesful`, "✔️", [
+              {
+                text: "Proceed to Login",
+                onPress: () => {
+                  navigate("login");
+                },
+                style: "default",
+              },
+            ]);
+          },
+
+          onError: (error) => {
+            Alert.alert("Registration Failed ☹️", "please try again", [
+              {
+                text: "Retry registration",
+                onPress: () => {},
+                style: "cancel",
+              },
+            ]);
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   return (
@@ -106,6 +146,7 @@ export const Register = ({ navigation: { navigate, goBack } }) => {
         <CustomButton
           buttonText={"Register"}
           onPress={handleSubmit(onSubmit)}
+          loading={isLoading}
         />
         <Text
           style={{

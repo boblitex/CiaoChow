@@ -1,6 +1,7 @@
 import { Container } from "containers/container/container";
 import React from "react";
 import {
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -16,9 +17,8 @@ import { colors } from "src/theme/colors";
 import { CustomButton } from "components/CustomButton";
 import { Controller, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import axios from "axios";
-import { instance } from "utils/axiosConfig";
-import { loginHelper } from "utils/loginHelper";
+import { loginHelper } from "utils/authHelper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const Login = ({ navigation: { navigate, goBack } }) => {
   const { control, handleSubmit } = useForm({
@@ -28,12 +28,29 @@ export const Login = ({ navigation: { navigate, goBack } }) => {
     },
   });
 
+  const { mutate: loginMutation, isLoading } = useMutation({
+    mutationFn: ({ email, password }) => loginHelper(email, password),
+    onSuccess: async (data) => {
+      await AsyncStorage.setItem("jwt", data?.data?.jwt);
+      navigate("foodScreen");
+    },
+    onError: () => {
+      Alert.alert("Login Failed", "Try Again", [
+        {
+          text: "Retry Login",
+          onPress: () => {},
+          style: "cancel",
+        },
+      ]);
+    },
+  });
+
   const onSubmit = async (data) => {
     const { email, password } = data;
     try {
-      const res = await loginHelper(email, password);
-      console.log(res.data);
+      loginMutation({ email, password });
     } catch (error) {
+      //ideally use an error reporting tool like bugsnag
       console.error(error.message);
     }
   };
@@ -101,7 +118,7 @@ export const Login = ({ navigation: { navigate, goBack } }) => {
         <CustomButton
           buttonText={"Login"}
           onPress={handleSubmit(onSubmit)}
-          // loading
+          loading={isLoading}
         />
         <Text
           style={{
