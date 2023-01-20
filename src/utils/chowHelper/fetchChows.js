@@ -1,8 +1,16 @@
+import { fetchJwt } from "utils/authHelper/fetchJwt";
+
 const { instance } = require("utils/axiosConfig");
 
-const fetchChow = async () => {
+export const fetchChow = async () => {
   try {
-    return await instance.get("/chows?populate=*");
+    const jwt = await fetchJwt();
+    const token = `Bearer ${jwt}`;
+    return await instance.get("/chows?populate=*", {
+      headers: {
+        Authorization: token,
+      },
+    });
   } catch (error) {
     console.error(error.response.data);
   }

@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { colors } from "src/theme/colors";
-import { Description } from "./Description";
-import { Nutrition } from "./Nutrition";
+import { ChowBody } from "./ChowBody";
 import LikeButton from "assets/images/heart.svg";
 
 const renderTabBar = (props) => (
@@ -30,7 +29,13 @@ const renderTabBar = (props) => (
   />
 );
 
-export const Chow = ({ onPress }) => {
+export const Chow = ({
+  onPress,
+  chowHeader,
+  descriptionText,
+  nutritionText,
+  imageURL,
+}) => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     {
@@ -41,27 +46,30 @@ export const Chow = ({ onPress }) => {
   ]);
 
   const renderScene = SceneMap({
-    description: Description,
-    nutrition: () => <Nutrition NutritionText={"hello"} />,
+    description: () => <ChowBody chowText={descriptionText} />,
+    nutrition: () => <ChowBody chowText={nutritionText} />,
   });
 
   return (
     <View style={{ backgroundColor: colors.Primary.primaryWhite, flex: 1 }}>
       <View style={{ flex: 1 }}>
         <Image
-          source={require("assets/images/carrot.png")}
-          style={{ width: "100%", position: "absolute" }}
+          source={{
+            uri: imageURL,
+          }}
+          style={{
+            width: "100%",
+            position: "absolute",
+            height: "110%",
+          }}
         />
-        <View style={{ position: "absolute", bottom: 0, alignSelf: "center" }}>
-          <SlideDots color={"white"} />
-        </View>
       </View>
       <View style={styles.bottomContainer}>
         <View style={styles.header}>
           <Text
             style={{ fontWeight: "600", fontSize: 24, fontFamily: "SemiBold" }}
           >
-            Fresh Carrot
+            {chowHeader}
           </Text>
           <LikeButton height={31} width={31} />
         </View>
