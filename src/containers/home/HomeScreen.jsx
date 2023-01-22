@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontFamily: "HeaderBold",
     fontWeight: "600",
-    fontSize: "28",
+    fontSize: 28,
     color: "white",
     margin: 5,
   },
