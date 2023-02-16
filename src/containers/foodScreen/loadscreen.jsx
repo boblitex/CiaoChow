@@ -21,7 +21,7 @@ export const Loadscreen = () => {
           style={{ alignSelf: "center", marginBottom: 20 }}
         />
         <PlaceholderLine width={30} height={40} />
-        {Array(10)
+        {Array(12)
           .fill("")
           .map((line, i) => (
             <PlaceholderLine key={i} />
