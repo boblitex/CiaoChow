@@ -18,8 +18,6 @@ import { CustomButton } from "components/CustomButton";
 import { Controller, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { registerHelper } from "utils/authHelper";
-import { instance } from "utils/axiosConfig";
-import axios from "axios";
 
 export const Register = ({ navigation: { navigate, goBack } }) => {
   const { control, handleSubmit } = useForm({
